@@ -1,1 +1,1 @@
-echo Hello NIMA
+echo Hello FRIEND
