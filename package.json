@@ -1,7 +1,7 @@
 {
   "name": "NIMA-PairCode",
   "version": "1.0.0",
-  "description": "Connect Whatsapp With Baileys Code Pairing",
+  "description": "Connect Whatsapp With NIMA Code Pairing",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,9 +13,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DGXeon/Xeon-PairCode.git"
+    "url": "git+https://github.com/nimesha206/NIMA-PairCode.git"
   },
-  "author": "DGXeon",
+  "author": "NIMA",
   "license": "ISC",
   "dependencies": {
     "@adiwajshing/keyed-db": "^0.2.4",
@@ -29,7 +29,7 @@
     "qrcode-terminal": "^0.12.0"
   },
   "bugs": {
-    "url": "https://github.com/DGXeon/Xeon-PairCode/issues"
+    "url": "https://github.com/nimesha206/NIMA-PairCode/issues"
   },
-  "homepage": "https://github.com/DGXeon/Xeon-PairCode#readme"
+  "homepage": "https://github.com/nimesha206/NIMA-PairCode#readme"
 }
