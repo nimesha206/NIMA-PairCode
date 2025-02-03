@@ -26,7 +26,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"
-    const XeonBotInc = makeWASocket({
+    const NIMABotInc = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: !pairingCode, // popping up QR in terminal log
       mobile: useMobile, // mobile api (prone to bans)
@@ -51,7 +51,7 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
 
     // login use pairing code
    // source code https://github.com/WhiskeySockets/Baileys/blob/master/Example/example.ts#L61
-   if (pairingCode && !XeonBotInc.authState.creds.registered) {
+   if (pairingCode && !NimaBotInc.authState.creds.registered) {
       if (useMobile) throw new Error('Cannot use pairing code with mobile api')
 
       let phoneNumber
@@ -59,46 +59,46 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
          phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
          if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
-            console.log(chalk.bgBlack(chalk.redBright("+94789549564")))
+            console.log(chalk.bgBlack(chalk.redBright("Start with country code of your WhatsApp Number, Example : +94789549564")))
             process.exit(0)
          }
       } else {
-         phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`+94789549564`)))
+         phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFor example: +94789549564 : `)))
          phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
 
          // Ask again when entering the wrong number
          if (!Object.keys(PHONENUMBER_MCC).some(v => phoneNumber.startsWith(v))) {
-            console.log(chalk.bgBlack(chalk.redBright("+94789549564")))
+            console.log(chalk.bgBlack(chalk.redBright("Start with country code of your WhatsApp Number, Example : +916909137213")))
 
-            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`+94789549564`)))
+            phoneNumber = await question(chalk.bgBlack(chalk.greenBright(`Please type your WhatsApp number 😍\nFor example: +94789549564 : `)))
             phoneNumber = phoneNumber.replace(/[^0-9]/g, '')
             rl.close()
          }
       }
 
       setTimeout(async () => {
-         let code = await XeonBotInc.requestPairingCode(phoneNumber)
+         let code = await NimaBotInc.requestPairingCode(phoneNumber)
          code = code?.match(/.{1,4}/g)?.join("-") || code
          console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)))
       }, 3000)
    }
 //------------------------------------------------------
-    XeonBotInc.ev.on("connection.update",async  (s) => {
+    NimaBotInc.ev.on("connection.update",async  (s) => {
         const { connection, lastDisconnect } = s
         if (connection == "open") {
             await delay(1000 * 10)
-            await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `🪀Support/Contact Developer\n\n\n⎆Donate: https://files.catbox.moe/3nugy4.jpeg\n\n⎆YouTube: https://youtube.com/@nimesha_editz?si=Q5zCorpkPIjMBSaH\n\n⎆Telegram Channel: https://t.me/xeonbotinc\n\n⎆Telegram Chat: https://github.com/nimesha206\n\n⎆WhatsApp Gc1: https://chat.whatsapp.com/J085BIRq2F614d44rWS4Co\n\n⎆WhatsApp Gc2: https://chat.whatsapp.com/EEOnU0V7dl9HF1mMFO8QWa\n\n⎆WhatsApp Gc3: https://chat.whatsapp.com/Dh0lD0Ee5hN1JMFXNqtxSG\n\n⎆WhatsApp Pm: Wa.me/94789549564\n\n⎆Instagram: https://chat.whatsapp.com/J085BIRq2F614d44rWS4Co\n\n⎆GitHub: https://github.com/nimesha206\n\n⎆Blog: https://github.com/nimesha206\n\n\n` });
-            let sessionXeon = fs.readFileSync('./sessions/creds.json');
+            await NimaBotInc.sendMessage(NimaBotInc.user.id, { text: `🪀Support/Contact Developer\n\n\n⎆Donate: https://files.catbox.moe/3nugy4.jpeg\n\n⎆YouTube: https://youtube.com/@nimesha_editz?si=Q5zCorpkPIjMBSaH\n\n⎆Telegram Channel: https://t.me/xeonbotinc\n\n⎆Telegram Chat: https://t.me/+AYOyJflnt-AzNGFl\n\n⎆WhatsApp Gc1: https://chat.whatsapp.com/J085BIRq2F614d44rWS4Co\n\n⎆WhatsApp Gc2: https://chat.whatsapp.com/J085BIRq2F614d44rWS4Co\n\n⎆WhatsApp Gc3: https://chat.whatsapp.com/J085BIRq2F614d44rWS4Co\n\n⎆WhatsApp Pm: Wa.me/+94789549564\n\n⎆GitHub: https://github.com/nimesha206/\n\n\n` });
+            let sessionNima = fs.readFileSync('./sessions/creds.json');
             await delay(1000 * 2) 
-             const xeonses = await  XeonBotInc.sendMessage(XeonBotInc.user.id, { document: sessionXeon, mimetype: `application/json`, fileName: `creds.json` })
-             await XeonBotInc.sendMessage(XeonBotInc.user.id, { text: `⚠️Do not share this file with anybody⚠️\n
+             const nimases = await  NimaBotInc.sendMessage(NimaBotInc.user.id, { document: sessionNima, mimetype: `application/json`, fileName: `creds.json` })
+             await NimaBotInc.sendMessage(NimaBotInc.user.id, { text: `⚠️Do not share this file with anybody⚠️\n
 ┌─❖
-│ Ohayo 😽
+│ THARU MD 😽
 └┬❖  
-┌┤✑  Thanks for using NIMA-PAIR-code
+┌┤✑  Thanks for using NIMA PAIR
 │└────────────┈ ⳹        
-│©2020-2025 NIMA_PAIR_CODE
-└─────────────────┈ ⳹\n\n ` }, {quoted: xeonses});
+│©2020-2023 THARU MD 
+└─────────────────┈ ⳹\n\n ` }, {quoted: nimases});
               await delay(1000 * 2) 
               process.exit(0)
         }
@@ -111,8 +111,8 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
             qr()
         }
     })
-    XeonBotInc.ev.on('creds.update', saveCreds)
-    XeonBotInc.ev.on("messages.upsert",  () => { })
+    NimaBotInc.ev.on('creds.update', saveCreds)
+    NimaBotInc.ev.on("messages.upsert",  () => { })
 }
 qr()
 
